@@ -6,10 +6,6 @@ const ImageGallery = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
   const fetchImages = async () => {
     try {
       const response = await axios.get(
@@ -32,6 +28,9 @@ const ImageGallery = () => {
       setLoading(true);
     }
   };
+  useEffect(() => {
+    fetchImages();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -43,7 +42,7 @@ const ImageGallery = () => {
   useEffect(() => {
     if (!loading) return;
     fetchImages();
-  }, [loading]);
+  }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
